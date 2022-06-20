@@ -2,11 +2,11 @@ package quotes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
 public class Graphics {
     JFrame frame;
-    JLabel quote;
+    JPanel centerPanel;
+    JLabel quote, author;
     JButton button;
     Graphics() {
         frame = new JFrame();
@@ -15,13 +15,24 @@ public class Graphics {
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new BorderLayout(10, 10));
+        frame.add(centerPanel, BorderLayout.CENTER);
+        centerPanel.setVisible(true);
 
         quote = new JLabel();
         quote.setText("Twój cytat pojawi siê tutaj.");
         quote.setHorizontalAlignment(JLabel.CENTER);
         quote.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
-        frame.add(quote, BorderLayout.CENTER);
+        centerPanel.add(quote, BorderLayout.CENTER);
         quote.setVisible(true);
+
+        author = new JLabel();
+        author.setText("");
+        author.setHorizontalAlignment(JLabel.RIGHT);
+        author.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 15));
+        centerPanel.add(author, BorderLayout.SOUTH);
+        author.setVisible(true);
 
         button = new JButton();
         button.setSize(150, 20);
@@ -29,7 +40,7 @@ public class Graphics {
         button.addActionListener(a -> {
             String previousQuote = quote.getText();
             do {
-                setQuote();
+                Main.getQuote();
             } while (previousQuote.equals(quote.getText()));
         });
 
@@ -39,8 +50,11 @@ public class Graphics {
         frame.setVisible(true);
     }
 
-    private void setQuote() {
-        Random random = new Random();
-        this.quote.setText(Main.QUOTES[random.nextInt(3)]);
+    void displayText(String text, String fieldName) {
+        switch (fieldName) {
+            case "quote" -> this.quote.setText("<html>" + text + "</html>");
+            case "author" -> this.author.setText("<html>" + text + "</html>");
+            default -> this.quote.setText("B³êdna nazwa pola wyœwietlania");
+        }
     }
 }
