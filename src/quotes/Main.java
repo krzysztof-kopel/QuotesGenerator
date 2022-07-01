@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public class Main {
     static Graphics view;
+    static Quote currentQuote;
     public static void main(String[] args) {
         view = new Graphics();
     }
@@ -11,11 +12,14 @@ public class Main {
     static void getQuote() {
         //TODO Wprowadziæ mo¿liwoœæ dowolnego ustawiania jêzyka
         String language = "pl";
-        if (language.matches("..")) {
+        if (language.matches("\\D\\D")) {
             try {
                 Quote formattedQuote = new Quote(language);
+                currentQuote = formattedQuote;
                 view.displayText(formattedQuote.content, "quote");
-                view.displayText(formattedQuote.author, "author");
+                if (view.seeAuthor.isSelected()) {
+                    view.displayText(formattedQuote.author, "author");
+                }
             } catch (IOException | InterruptedException e) {
                 view.displayText(String.format("Wyst¹pi³ problem: %s", e.getCause()), "quote");
                 view.displayText("", "author");

@@ -5,9 +5,11 @@ import java.awt.*;
 
 public class Graphics {
     JFrame frame;
-    JPanel centerPanel;
+    JPanel centerPanel, lowerPanel;
     JLabel quote, author;
     JButton button;
+    JCheckBox seeAuthor;
+
     Graphics() {
         frame = new JFrame();
         frame.setSize(500, 400);
@@ -20,6 +22,11 @@ public class Graphics {
         frame.add(centerPanel, BorderLayout.CENTER);
         centerPanel.setVisible(true);
 
+        lowerPanel = new JPanel();
+        lowerPanel.setLayout(new GridLayout(1, 2));
+        centerPanel.add(lowerPanel, BorderLayout.SOUTH);
+        lowerPanel.setVisible(true);
+
         quote = new JLabel();
         quote.setText("Twój cytat pojawi siê tutaj.");
         quote.setHorizontalAlignment(JLabel.CENTER);
@@ -27,11 +34,25 @@ public class Graphics {
         centerPanel.add(quote, BorderLayout.CENTER);
         quote.setVisible(true);
 
+        seeAuthor = new JCheckBox();
+        seeAuthor.setText("Wyœwietl autora");
+        seeAuthor.setSelected(true);
+        seeAuthor.setSize(100, 50);
+        seeAuthor.addActionListener(a -> {
+            if (this.author.getText().equals("<html></html>") && Main.currentQuote != null) {
+                this.displayText(Main.currentQuote.author, "author");
+            } else {
+                this.displayText("", "author");
+            }
+        });
+        lowerPanel.add(seeAuthor);
+        seeAuthor.setVisible(true);
+
         author = new JLabel();
         author.setText("");
-        author.setHorizontalAlignment(JLabel.RIGHT);
+        author.setHorizontalAlignment(JLabel.CENTER);
         author.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 15));
-        centerPanel.add(author, BorderLayout.SOUTH);
+        lowerPanel.add(author);
         author.setVisible(true);
 
         button = new JButton();
@@ -43,7 +64,6 @@ public class Graphics {
                 Main.getQuote();
             } while (previousQuote.equals(quote.getText()));
         });
-
         frame.add(button, BorderLayout.SOUTH);
         button.setVisible(true);
 
