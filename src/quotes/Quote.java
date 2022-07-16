@@ -9,10 +9,14 @@ public class Quote {
         this.language = language;
     }
 
-    Quote(String language) throws java.io.IOException, java.lang.InterruptedException {
-        String[] input = InternetConnector.downloadQuote(language);
+    Quote(Language language) throws java.io.IOException, java.lang.InterruptedException {
+        this(language.shortcut);
+    }
+
+    Quote(String language_code) throws java.io.IOException, java.lang.InterruptedException {
+        String[] input = InternetConnector.downloadQuote(language_code);
         this.content = input[0];
         this.author = input[1];
-        this.language = language;
+        this.language = language_code;
     }
 }

@@ -11,14 +11,13 @@ public class Main {
 
     static void getQuote() {
         //TODO Wprowadziæ mo¿liwoœæ dowolnego ustawiania jêzyka
-        String language = "pl";
-        if (language.matches("\\D\\D")) {
+        Language chosen_language = Language.POLISH;
+        if (chosen_language.shortcut.matches("\\D\\D")) {
             try {
-                Quote formattedQuote = new Quote(language);
-                currentQuote = formattedQuote;
-                view.displayText(formattedQuote.content, "quote");
+                currentQuote = new Quote(chosen_language);
+                view.displayText(currentQuote.content, "quote");
                 if (view.seeAuthor.isSelected()) {
-                    view.displayText(formattedQuote.author, "author");
+                    view.displayText(currentQuote.author, "author");
                 }
             } catch (IOException | InterruptedException e) {
                 view.displayText(String.format("Wyst¹pi³ problem: %s", e.getCause()), "quote");
