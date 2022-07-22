@@ -9,6 +9,7 @@ public class Graphics {
     JLabel quote, author;
     JButton button;
     JCheckBox seeAuthor;
+    JList<Language> languages;
 
     Graphics() {
         frame = new JFrame();
@@ -26,6 +27,10 @@ public class Graphics {
         lowerPanel.setLayout(new GridLayout(1, 2));
         centerPanel.add(lowerPanel, BorderLayout.SOUTH);
         lowerPanel.setVisible(true);
+
+        languages = new JList<>(Language.values());
+        centerPanel.add(languages, BorderLayout.NORTH);
+        languages.setVisible(true);
 
         quote = new JLabel();
         quote.setText("Twój cytat pojawi siê tutaj.");

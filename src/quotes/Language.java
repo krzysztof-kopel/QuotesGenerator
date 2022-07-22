@@ -2,9 +2,9 @@ package quotes;
 
 public enum Language {
 
-    ENGLISH("English", "en"), SPAIN("Spain", "es"), PORTUGAL("Portugal", "pt"),
-    GERMAN("German", "de"), FRENCH("French", "fr"), ITALIAN("Italian", "it"),
-    CZECH("Czech", "cs"), SLOVAK("Slovak", "sk"), POLISH("Polish", "pl");
+    ENGLISH("English", "en"), SPANISH("Espanol", "es"), PORTUGAL("Portugues", "pt"),
+    GERMAN("Deutsch", "de"), FRENCH("Français", "fr"), ITALIAN("Italiano", "it"),
+    SLOVAK("Slovenský", "sk"), POLISH("Polski", "pl");
 
     Language(String name, String shortcut) {
         this.name = name;
