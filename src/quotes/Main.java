@@ -10,8 +10,7 @@ public class Main {
     }
 
     static void getQuote() {
-        //TODO Wprowadziæ mo¿liwoœæ dowolnego ustawiania jêzyka
-        Language chosen_language = Language.POLISH;
+        Language chosen_language = view.languages.getSelectedValue();
         if (chosen_language.shortcut.matches("\\D\\D")) {
             try {
                 currentQuote = new Quote(chosen_language);

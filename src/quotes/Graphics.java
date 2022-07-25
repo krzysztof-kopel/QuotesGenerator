@@ -10,6 +10,7 @@ public class Graphics {
     JButton button;
     JCheckBox seeAuthor;
     JList<Language> languages;
+    JScrollPane scrollPane;
 
     Graphics() {
         frame = new JFrame();
@@ -29,12 +30,15 @@ public class Graphics {
         lowerPanel.setVisible(true);
 
         languages = new JList<>(Language.values());
-        centerPanel.add(languages, BorderLayout.NORTH);
+        languages.setVisibleRowCount(3);
+        languages.setSelectedIndex(1);
         languages.setVisible(true);
 
-        quote = new JLabel();
-        quote.setText("Twój cytat pojawi siê tutaj.");
-        quote.setHorizontalAlignment(JLabel.CENTER);
+        scrollPane = new JScrollPane(languages);
+        centerPanel.add(scrollPane, BorderLayout.NORTH);
+        scrollPane.setVisible(true);
+
+        quote = new JLabel("<html><body style='text-align: center'>Twój cytat pojawi siê tutaj.", SwingConstants.CENTER);
         quote.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
         centerPanel.add(quote, BorderLayout.CENTER);
         quote.setVisible(true);
@@ -77,7 +81,7 @@ public class Graphics {
 
     void displayText(String text, String fieldName) {
         switch (fieldName) {
-            case "quote" -> this.quote.setText("<html>" + text + "</html>");
+            case "quote" -> this.quote.setText("<html><body style='text-align: center'>" + text + "</html>");
             case "author" -> this.author.setText("<html>" + text + "</html>");
             default -> this.quote.setText("B³êdna nazwa pola wyœwietlania");
         }
