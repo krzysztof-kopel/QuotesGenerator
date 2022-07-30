@@ -22,7 +22,6 @@ public class InternetConnector {
     }
 
     static String[] formatQuote(String json) {
-        System.out.println(json);
         JSONObject allElements = new JSONObject(json);
         String[] output = new String[2];
         output[0] = allElements.getString("content");

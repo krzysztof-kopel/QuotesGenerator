@@ -1,9 +1,10 @@
 package quotes;
 
 public class Quote {
-    String content, author, language;
+    String content, author;
+    Language language;
 
-    Quote(String content, String author, String language) {
+    Quote(String content, String author, Language language) {
         this.content = content;
         this.author = author;
         this.language = language;
@@ -11,12 +12,12 @@ public class Quote {
 
     Quote(Language language) throws java.io.IOException, java.lang.InterruptedException {
         this(language.shortcut);
+        this.language = language;
     }
 
-    Quote(String language_code) throws java.io.IOException, java.lang.InterruptedException {
-        String[] input = InternetConnector.downloadQuote(language_code);
+    Quote(String languageCode) throws java.io.IOException, java.lang.InterruptedException {
+        String[] input = InternetConnector.downloadQuote(languageCode);
         this.content = input[0];
         this.author = input[1];
-        this.language = language_code;
     }
 }
